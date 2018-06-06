@@ -7,10 +7,48 @@ import LoadingIndicator from '../Common/LoadingIndicator';
 
 class Home extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      posts: [],
+      loading: false,
+      hasError: false,
+    };
+  }
+
+  componentWillMount() {
+    this.setState({loading: true});
+    apiCall('posts', {}, 'GET')
+    .then(posts => {
+      this.setState({posts, loading: false});
+    })
+    .catch(error => {
+      this.setState({hasError: true, loading: false});
+      console.error(error);
+    });
+  }
+
   render () {
     return (
       <div className={`posts-container container`}>
-        <h1>{`Home`}</h1>
+        {
+          this.state.loading
+          ?
+            <LoadingIndicator />
+          :
+            null
+        }
+        {
+          this.state.hasError
+          ?
+            <ErrorMessage title={'Error!'} message={'Unable to retrieve posts!'} />
+          :
+            null
+        }
+        {
+          this.state.posts.map(post => <PostSummary key={post.id} post={post}>Post</PostSummary>)
+        }
       </div>
     );
   }
