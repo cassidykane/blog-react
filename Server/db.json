@@ -1,6 +1,13 @@
 {
   "posts": [
     {
+      "id": "61d0980a-a855-464d-9c41-4c840d22772f",
+      "author": "cssidy",
+      "title": "new post",
+      "content": "this is a new post",
+      "datetime": "1528319198"
+    },
+    {
       "id": "4e54ea40-6dbc-4ea4-b281-2dad42876590",
       "author": "Mari",
       "title": "My last post",
